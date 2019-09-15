@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Register extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
@@ -17,7 +17,7 @@ class Login extends CI_Controller {
 			$this->load->view('template', $d);
 		}
 		else{
-			$d['v'] = 'login';
+			$d['v'] = 'register';
 			$this->load->view('template', $d);
 		}
 	}
@@ -29,28 +29,16 @@ class Login extends CI_Controller {
 		$email = $_POST['username'];
 		$password = $_POST['password'];
  
-		$data = $this->user_model->login($email, $password);
+		$data = $this->user_model->register($email, $password);
  
 		if($data){
 			$this->session->set_userdata('user', $data);
-			$output['message'] = 'Logging in. Please wait...';
+			$output['message'] = 'Registering. Please wait...';
 		}
 		else{
 			$output['error'] = true;
-			$output['message'] = 'Login Invalid. User not found';
+			$output['message'] = 'Invalid register.';
 		}
 		echo json_encode($output);
-	}
-
-	public function out()
-	{
-		$this->load->library('session');
-		$this->session->unset_userdata('user');
-		redirect('/login');
-	}
-
-	public function parse()
-	{
-		$rss_url = "​https://www.theregister.co.uk/software/headlines.atom​";
 	}
 }

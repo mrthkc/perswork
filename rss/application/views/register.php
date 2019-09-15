@@ -1,6 +1,6 @@
 <div class="login-form">
-    <form id="loginForm">
-        <h2 class="text-center">Sign in</h2>   
+    <form id="registerForm">
+        <h2 class="text-center">Register</h2>   
         <div class="form-group">
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -14,12 +14,9 @@
             </div>
         </div>        
         <div class="form-group">
-			<button type="submit" class="btn btn-primary login-btn btn-block">Sign in</button>
+            <button type="submit" class="btn btn-primary login-btn btn-block">Register</button>
         </div>
-	</form>
-	<div>
-		<button id="registerButton" type="submit" class="btn btn-primary login-btn btn-block">Register</button>
-	</div>
+    </form>
     <div id="response" class="alert text-center" style="margin-top:20px; display:none;">
         <button type="button" class="close" id="clearButton"><span aria-hidden="true">&times;</span></button>
         <span id="message"></span>
@@ -27,13 +24,13 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#loginForm').submit(function(e){
+		$('#registerForm').submit(function(e){
 			e.preventDefault();
-			var user = $('#loginForm').serialize();
+			var user = $('#registerForm').serialize();
 			var login = function(){
 				$.ajax({
 					type: 'POST',
-					url: 'http://rsstask.test/login/do',
+					url: 'http://rsstask.test/register/do',
 					dataType: 'json',
 					data: user,
 					success:function(response){
@@ -43,8 +40,8 @@
 						}
 						else{
 							$('#response').removeClass('alert-danger').addClass('alert-success').show();
-							$('#loginForm')[0].reset();
-                            location.reload();
+							$('#registerForm')[0].reset();
+                            location.reload('/home');
 						}
 					}
 				});
@@ -54,10 +51,6 @@
  
 		$(document).on('click', '#clearButton', function(){
 			$('#response').hide();
-		});
-
-		$('#registerButton').on('click', function(){
-			location.replace('/register');
 		});
 	});
 </script>
