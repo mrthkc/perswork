@@ -48,9 +48,4 @@ class Login extends CI_Controller {
 		$this->session->unset_userdata('user');
 		redirect('/login');
 	}
-
-	public function parse()
-	{
-		$rss_url = "​https://www.theregister.co.uk/software/headlines.atom​";
-	}
 }

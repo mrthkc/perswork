@@ -37,7 +37,7 @@ class Register extends CI_Controller {
 		}
 		else{
 			$output['error'] = true;
-			$output['message'] = 'Invalid register.';
+			$output['message'] = 'User already exists.';
 		}
 		echo json_encode($output);
 	}

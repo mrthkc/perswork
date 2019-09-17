@@ -15,14 +15,11 @@
 				'username'	=>  $email,
 				'password'	=>  $password
 			);
-			if ($this->db->insert('user', $data))
-			{
-				return $data;
-			}
-			else
-			{
-				return false;
-			}
+			$insert_query = $this->db->insert_string('user', $data);
+			$insert_query = str_replace("INSERT INTO","INSERT IGNORE INTO",$insert_query);
+			$this->db->query($insert_query);
+
+			return ($this->db->affected_rows() != 1) ? false : $data;
 		}
 	}
 ?>
