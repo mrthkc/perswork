@@ -1,5 +1,7 @@
 # mrthkc - Personal
 
-### Mert Hakci
+### Mert Hakci personal practice repo.
+
+
 
 ![Logo](/images/me.jpg)
