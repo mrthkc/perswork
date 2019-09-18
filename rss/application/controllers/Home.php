@@ -5,6 +5,7 @@ class Home extends CI_Controller {
 
 	//exclude words
 	const OFFWORDS = array("the","be","to","of","and","a","in","that","have","I","it","for","not","on","with","he","as","you","do","at","this","but","his","by","from","they","we","say","her","she","or","an","will","my","one","all","would","there","their","what","so","up","out","if","about","who","get","which","go","me");
+	const EXCLUDELIST = array("http", "https", "www", "href", "blank", "com", "co", "uk", "target", "html");
 	//special feed tags not to check
 	const OFFTAGS = array("id", "rel", "type", "href", "author");
 
@@ -93,7 +94,7 @@ class Home extends CI_Controller {
 				foreach ($matched_words as $word)
 				{
 					$word = strtolower($word);
-					if (in_array($word, self::OFFWORDS))
+					if (in_array($word, array_merge(self::OFFWORDS, self::EXCLUDELIST) ))
 						continue;
 					
 					if (!isset($words[$word]))
