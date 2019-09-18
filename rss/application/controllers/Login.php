@@ -27,7 +27,7 @@ class Login extends CI_Controller {
 		$output = array('error' => false);
  
 		$email = $_POST['username'];
-		$password = $_POST['password'];
+		$password = md5($_POST['password']);
  
 		$data = $this->user_model->login($email, $password);
  

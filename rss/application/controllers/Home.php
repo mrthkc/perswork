@@ -17,18 +17,21 @@ class Home extends CI_Controller {
     public function index(){
 		if($this->session->userdata('user')){
 			$d['v'] = 'home';
+			$d['f'] = 'https://www.theregister.co.uk/software/headlines.atom';
 			$this->load->view('template', $d);
 		}
 		else{
 			$d['v'] = 'login';
+			$d['f'] = 'https://www.theregister.co.uk/software/headlines.atom';
 			$this->load->view('template', $d);
 		}
 	}
 	
 	public function parse(){
 		// result arrays
+		$word_li = "";
+		$item_li = "";
 		$feed_top = array();
-		$feed_items = array();
 
 		// download feed
 		$feed_url = $_POST["url"];
@@ -43,18 +46,26 @@ class Home extends CI_Controller {
 		// finding top 10
 		arsort($feed_top);
 		$feed_top = array_slice($feed_top, 0, 10);
+		$word_li .= "<ul>";
+		foreach($feed_top as $ord => $val)
+		{
+			$word_li .= "<li>" . $ord. " - " . $val. "</li>";
+		}
+		$word_li .= "</ul>";
 
 		// collecting feed entry titles & authors
+		$item_li .= "<ul>";
 		foreach($feed_array["entry"] as $tag => $val)
 		{
-			$feed_items[] = $val["title"] . " | by " . $val["author"]["name"];
+			$item_li .= "<li>" . $val["title"] . " | by " . $val["author"]["name"] . "</li>";
 		}
+		$item_li .= "</ul>";
 
 
 		$output["error"] = false;
 		$output["message"] = array(
-			"words" => $feed_top,
-			"items" => $feed_items
+			"words" => $word_li,
+			"items" => $item_li
 		);
 		echo json_encode($output);
 	}

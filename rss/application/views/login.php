@@ -44,7 +44,7 @@
 						else{
 							$('#response').removeClass('alert-danger').addClass('alert-success').show();
 							$('#loginForm')[0].reset();
-                            location.reload();
+                            window.location.replace("/home");
 						}
 					}
 				});

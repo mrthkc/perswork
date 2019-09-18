@@ -23,11 +23,21 @@
     </div>	
 </div>
 <script type="text/javascript">
+	function isEmail(email) {
+		var emailTemplate = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		return emailTemplate.test(email);
+	}
 	$(document).ready(function(){
 		$('#registerForm').submit(function(e){
 			e.preventDefault();
 			var user = $('#registerForm').serialize();
 			var login = function(){
+				if (!isEmail($('[name=username]').val()))
+				{
+					$('#message').html("Not a valid email address.");
+					$('#response').removeClass('alert-success').addClass('alert-danger').show();
+					return;
+				}
 				$.ajax({
 					type: 'POST',
 					url: 'http://rsstask.test/register/do',
@@ -41,7 +51,7 @@
 						else{
 							$('#response').removeClass('alert-danger').addClass('alert-success').show();
 							$('#registerForm')[0].reset();
-                            location.reload('/home');
+                            window.location.replace("/home");
 						}
 					}
 				});
