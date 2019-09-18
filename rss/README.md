@@ -3,7 +3,7 @@
 ### Working with a static address, just now
 Need following open source softwares before starting;
 * Nginx 1.17.0
-* PHP 7.1.30
+* PHP 7.1.30 (CodeIgniter 3 Used as Web Framework)
 * MySQL 14.14
 > For a fast setup Homwbrew could be an option.
 
